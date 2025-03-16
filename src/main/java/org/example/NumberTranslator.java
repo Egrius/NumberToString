@@ -12,8 +12,29 @@ public class NumberTranslator {
         vocabulary = new Vocabulary();
     }
 
+    public String printNumber() {
+        ArrayList<Integer> digits = numberToArrayList();
+        int count = digits.size();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 0;
+
+        //В дальнейшем немного переделаю
+        switch (count) {
+            case 1:
+                stringBuilder.append(vocabulary.translateOne(digits.get(i)));
+                break;
+            case 2:
+                stringBuilder.append(vocabulary.translateTwo(digits.get(i++)*10 + digits.get((i))));
+                break;
+            default:
+                break;
+        }
+        return stringBuilder.toString();
+    }
+
     //1 0 8 4
-    public ArrayList<Integer> numberToArrayList() {
+    private ArrayList<Integer> numberToArrayList() {
         ArrayList<Integer> digits = new ArrayList<>();
         int del1 = 10, del2 = 1;
         int buf;
@@ -24,26 +45,5 @@ public class NumberTranslator {
             digits.add(0, buf);
         }
         return digits;
-    }
-
-    public String printNumber() {
-        ArrayList<Integer> digits = numberToArrayList();
-        int count = digits.size();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        int i = 0;
-
-        switch (count) {
-            case 1:
-                stringBuilder.append(vocabulary.getRepresentation(count, digits.get(i)));
-                break;
-            case 2:
-                stringBuilder.append(vocabulary.getRepresentation(count, digits.get(i++)*10 + digits.get((i))));
-                break;
-            default:
-                break;
-        }
-        
-        return stringBuilder.toString();
     }
 }

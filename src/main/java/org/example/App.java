@@ -2,7 +2,6 @@ package org.example;
 
 /*
 Планы:
-    - исправить numberToArrayList(), убрать этот реверс, бо слишком уж странно выглядит
     - отдельные методы для обработки каждого разряда (единицы, десятки, сотни и т.д). getRepresentation() выглядит стрёмно
     - обработка отрицательных чисел
     - поддерживать большие числа
@@ -18,7 +17,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        NumberTranslator numberTranslator = new NumberTranslator(72);
+        NumberTranslator numberTranslator = new NumberTranslator(14);
         String result = numberTranslator.printNumber();
         System.out.println(result);
     }
