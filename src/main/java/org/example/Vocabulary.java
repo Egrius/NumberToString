@@ -54,7 +54,7 @@ public class Vocabulary {
             Map.entry(9, "девятьсот")
     );
 
-    private List<String> bigNumbers = Arrays.asList("тысяча", "миллион", "миллиард");
+    private final List<String> bigNumbers = Arrays.asList("тысяча", "миллион", "миллиард");
     
     public Vocabulary() {
        
