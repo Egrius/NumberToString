@@ -3,41 +3,41 @@ package org.example;
 import java.util.Map;
 
 public class Vocabulary {
-   
-    private Map<Integer,String> digits = Map.of(
-        1, "один", 
-        2, "два", 
-        3,"три", 
-        4, "четыре",
-        5, "пять",
-        6, "шесть",
-        7, "семь",
-        8, "восемь",
-        9, "девять"       
-        );
 
-    private Map<Integer,String> nums = Map.of(
-        10, "десять",
-        11, "одинадцать",
-        12, "двенадцать",
-        13, "тринадцать",
-        14, "четырнадцать",
-        15, "пятнадцать",
-        16, "шестнадцать",
-        17, "семнадцать",
-        18, "восемнадцать",
-        19, "девятнадцать"
+    private final Map<Integer, String> digits = Map.ofEntries(
+            Map.entry(1, "один"),
+            Map.entry(2, "два"),
+            Map.entry(3, "три"),
+            Map.entry(4, "четыре"),
+            Map.entry(5, "пять"),
+            Map.entry(6, "шесть"),
+            Map.entry(7, "семь"),
+            Map.entry(8, "восемь"),
+            Map.entry(9, "девять")
     );
 
-    private Map<Integer,String> tens = Map.of(
-        2, "двадцать",
-        3, "тридцать",
-        4, "сорок",
-        5, "пятьдесят",
-        6, "шестьдесят",
-        7, "семьдесят",
-        8, "восемьдесят",
-        9, "девяносто"
+    private final Map<Integer, String> numbers = Map.ofEntries(
+            Map.entry(10, "десять"),
+            Map.entry(11, "одинадцать"),
+            Map.entry(12, "двенадцать"),
+            Map.entry(13, "тринадцать"),
+            Map.entry(14, "четырнадцать"),
+            Map.entry(15, "пятнадцать"),
+            Map.entry(16, "шестнадцать"),
+            Map.entry(17, "семнадцать"),
+            Map.entry(18, "восемнадцать"),
+            Map.entry(19, "девятнадцать")
+    );
+
+    private final Map<Integer, String> tens = Map.ofEntries(
+            Map.entry(2, "двадцать"),
+            Map.entry(3, "тридцать"),
+            Map.entry(4, "сорок"),
+            Map.entry(5, "пятьдесят"),
+            Map.entry(6, "шестьдесят"),
+            Map.entry(7, "семьдесят"),
+            Map.entry(8, "восемьдесят"),
+            Map.entry(9, "девяносто")
     );
 
    // private List<String> tens = Arrays.asList("десять", "сто", "тысяча", "миллион", "миллиард");
@@ -52,7 +52,7 @@ public class Vocabulary {
                 return digits.get(number);
             case 2:
                 if(number >= 20 && number <= 99) return tens.get(number / 10) + " " + digits.get(number % 10);
-                else return nums.get(number);
+                else return numbers.get(number);
             default:
                 return "";
         }
