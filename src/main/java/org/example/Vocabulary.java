@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Vocabulary {
 
-    protected Map<Integer, String> digits = Map.ofEntries(
+    protected final Map<Integer, String> digits = Map.ofEntries(
             Map.entry(1, "один"),
             Map.entry(2, "два"),
             Map.entry(3, "три"),
@@ -18,7 +18,7 @@ public class Vocabulary {
             Map.entry(9, "девять")
     );
 
-    protected Map<Integer, String> numbers = Map.ofEntries(
+    protected final Map<Integer, String> numbers = Map.ofEntries(
             Map.entry(10, "десять"),
             Map.entry(11, "одинадцать"),
             Map.entry(12, "двенадцать"),
@@ -31,7 +31,7 @@ public class Vocabulary {
             Map.entry(19, "девятнадцать")
     );
 
-    protected Map<Integer, String> tens = Map.ofEntries(
+    protected final Map<Integer, String> tens = Map.ofEntries(
             Map.entry(2, "двадцать"),
             Map.entry(3, "тридцать"),
             Map.entry(4, "сорок"),
@@ -42,7 +42,7 @@ public class Vocabulary {
             Map.entry(9, "девяносто")
     );
 
-    private  Map<Integer, String> hundreds = Map.ofEntries(
+    protected final Map<Integer, String> hundreds = Map.ofEntries(
             Map.entry(1, "сто"),
             Map.entry(2, "двести"),
             Map.entry(3, "триста"),
@@ -54,7 +54,7 @@ public class Vocabulary {
             Map.entry(9, "девятьсот")
     );
 
-   private List<String> bigNumbers = Arrays.asList("тысяча", "миллион", "миллиард");
+    private List<String> bigNumbers = Arrays.asList("тысяча", "миллион", "миллиард");
     
     public Vocabulary() {
        
