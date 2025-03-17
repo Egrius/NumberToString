@@ -22,15 +22,15 @@ public class NumberTranslator {
         //В дальнейшем немного переделаю
         switch (count) {
             case 1:
-                stringBuilder.append(vocabulary.translateOne(digits.get(i)));
                 break;
             case 2:
-                stringBuilder.append(vocabulary.translateTwo(digits.get(i++)*10 + digits.get((i))));
+
                 break;
             default:
                 break;
         }
         return stringBuilder.toString();
+
     }
 
     //1 0 8 4

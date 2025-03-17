@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Vocabulary {
@@ -32,6 +30,7 @@ public class Vocabulary {
     );
 
     protected final Map<Integer, String> tens = Map.ofEntries(
+            Map.entry(1, "десять"),
             Map.entry(2, "двадцать"),
             Map.entry(3, "тридцать"),
             Map.entry(4, "сорок"),
@@ -53,41 +52,34 @@ public class Vocabulary {
             Map.entry(8, "восемьсот"),
             Map.entry(9, "девятьсот")
     );
+    private final Declination declinator = new Declination();
 
-    private final List<String> bigNumbers = Arrays.asList("тысяча", "миллион", "миллиард");
-    
-    public Vocabulary() {
-       
-    }
+    public Vocabulary() { }
 
     //Зависит от count
+    //Однозначные
     protected String translateOne(int number) {
         return digits.get(number);
     }
-
+    //Десятки
     protected String translateTwo(int number) {
         if(number >= 20 && number <= 99) return tens.get(number / 10) + " " + digits.get(number % 10);
         else return numbers.get(number);
     }
-
-    protected String translateThree(int number) {
+    //Сотни
+    //Допилить функцию, чтобы переводила разные числа 200, 206, 224 !!!!
+    protected String translateThree(int number, int count) {
         if(number != 0) {
             return hundreds.get(number);
         } else return "";
     }
 
-    //Склонения для тысяч
-    protected String translateFour(int number) {
-        if (number == 1) {
-            return "одна тысяча";
+    protected String translateThousands(int number, int count) {
+        int tensPart = number / 10; // Десятки
+        int unitsPart = number % 10; // Единицы
 
-        } else if (number >= 2 && number <= 4) {
-            if(number == 2) return "две тысячи";
-            else return digits.get(number)  + " тысячи";
+        String result = "";
 
-        } else {
-            return digits.get(number) + " тысяч";
-        }
+        return ""; //Не готово
     }
-
 }
