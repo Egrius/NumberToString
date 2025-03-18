@@ -81,8 +81,6 @@ public class Vocabulary {
         int tensPart = tensAndUnits / 10;
         int unitsPart  = tensAndUnits % 10;
 
-        System.out.println("HundredsPart: " + hundredsPart + ", tensPart: " + tensPart + ", unitsPart: " + unitsPart);
-
         String result = "";
 
         if(hundredsPart != 0) {
