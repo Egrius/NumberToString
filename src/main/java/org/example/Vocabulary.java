@@ -74,12 +74,41 @@ public class Vocabulary {
         } else return "";
     }
 
+
     protected String translateThousands(int number, int count) {
-        int tensPart = number / 10; // Десятки
-        int unitsPart = number % 10; // Единицы
+        int tensPart; // Десятки
+        int unitsPart;  // Единицы
+
+        //Возможно проверку можно сделать проще
+        if(number >= 10) {
+            tensPart = number / 10;
+            unitsPart = number % 10;
+        }
+        else {
+            unitsPart = number;
+            tensPart = 0;
+        }
 
         String result = "";
 
-        return ""; //Не готово
+        if(tensPart != 0) {
+            if(tensPart >= 20) {
+                result += hundreds.get(tensPart / 10) + " " + tens.get(tensPart % 10) + " ";
+            }
+            else if (tensPart >= 10) {
+                result += hundreds.get(tensPart / 10) + " " + tens.get(tensPart % 10) + " ";
+            }
+            else {
+                result += tens.get(tensPart) + " ";
+            }
+        }
+        if(unitsPart != 0) {
+            if(unitsPart == 1) result += "одна" + " ";
+            else if (unitsPart == 2) result += "две" + " " ;
+            else result += digits.get(unitsPart) + " ";
+
+            result += declinator.getDeclination(unitsPart, count);
+        }
+        return result;
     }
 }

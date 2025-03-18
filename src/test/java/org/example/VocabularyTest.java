@@ -14,4 +14,13 @@ class VocabularyTest {
         }
     }
 
+    @Test
+    public void shouldTranslateThousandDigitCorrectly() {
+        Vocabulary vocabulary = new Vocabulary();
+        Assertions.assertEquals("сто девяносто одна тысяча", vocabulary.translateThousands(191, 6));
+        Assertions.assertEquals("восемьдесят три тысячи", vocabulary.translateThousands(83, 5));
+        Assertions.assertEquals("триста тридцать три тысячи", vocabulary.translateThousands(333, 6));
+        Assertions.assertEquals("девять тысяч", vocabulary.translateThousands(9, 4));
+    }
+
 }

@@ -7,7 +7,7 @@ public class Declination {
         else return many;
     }
 
-    public String getDeclination (int count, int number) {
+    public String getDeclination (int number, int count) {
         if (count >= 4 && count <= 6) {
             return getBigNumberDeclination(number, "тысяча", "тысячи", "тысяч");
         } else if (count >= 7 && count <= 9) {

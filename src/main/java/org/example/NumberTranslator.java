@@ -18,6 +18,7 @@ public class NumberTranslator {
 
         StringBuilder stringBuilder = new StringBuilder();
         int i = 0;
+        //return vocabulary.translateThousands(191, 6);
 
         //В дальнейшем немного переделаю
         switch (count) {
@@ -30,7 +31,6 @@ public class NumberTranslator {
                 break;
         }
         return stringBuilder.toString();
-
     }
 
     //1 0 8 4
