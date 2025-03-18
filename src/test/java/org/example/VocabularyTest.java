@@ -21,6 +21,9 @@ class VocabularyTest {
         Assertions.assertEquals("восемьдесят три тысячи", vocabulary.translateThousands(83, 5));
         Assertions.assertEquals("триста тридцать три тысячи", vocabulary.translateThousands(333, 6));
         Assertions.assertEquals("девять тысяч", vocabulary.translateThousands(9, 4));
+        Assertions.assertEquals("одиннадцать миллиардов", vocabulary.translateThousands(11, 11));
+        Assertions.assertEquals("сто тридцать один миллиард", vocabulary.translateThousands(131, 12));
+
     }
 
 }

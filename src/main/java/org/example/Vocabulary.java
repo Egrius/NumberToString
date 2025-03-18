@@ -18,7 +18,7 @@ public class Vocabulary {
 
     protected final Map<Integer, String> numbers = Map.ofEntries(
             Map.entry(10, "десять"),
-            Map.entry(11, "одинадцать"),
+            Map.entry(11, "одиннадцать"),
             Map.entry(12, "двенадцать"),
             Map.entry(13, "тринадцать"),
             Map.entry(14, "четырнадцать"),
@@ -67,7 +67,7 @@ public class Vocabulary {
         else return numbers.get(number);
     }
     //Сотни
-    //Допилить функцию, чтобы переводила разные числа 200, 206, 224 !!!!
+    //Эту функцию думаю можно перенести в translateThousands, да и ту функцию переименовать иначе.
     protected String translateThree(int number, int count) {
         if(number != 0) {
             return hundreds.get(number);
@@ -76,39 +76,43 @@ public class Vocabulary {
 
 
     protected String translateThousands(int number, int count) {
-        int tensPart; // Десятки
-        int unitsPart;  // Единицы
+        int hundredsPart = number / 100;
+        int tensAndUnits = number % 100;
+        int tensPart = tensAndUnits / 10;
+        int unitsPart  = tensAndUnits % 10;
 
-        //Возможно проверку можно сделать проще
-        if(number >= 10) {
-            tensPart = number / 10;
-            unitsPart = number % 10;
-        }
-        else {
-            unitsPart = number;
-            tensPart = 0;
-        }
+        System.out.println("HundredsPart: " + hundredsPart + ", tensPart: " + tensPart + ", unitsPart: " + unitsPart);
 
         String result = "";
 
-        if(tensPart != 0) {
-            if(tensPart >= 20) {
-                result += hundreds.get(tensPart / 10) + " " + tens.get(tensPart % 10) + " ";
-            }
-            else if (tensPart >= 10) {
-                result += hundreds.get(tensPart / 10) + " " + tens.get(tensPart % 10) + " ";
-            }
-            else {
+        if(hundredsPart != 0) {
+            result += hundreds.get(hundredsPart) + " ";
+        }
+
+        if (tensAndUnits >= 10 && tensAndUnits <= 19){
+            return numbers.get(tensAndUnits) + " " +  declinator.getDeclination(tensAndUnits, count);
+
+        } else {
+            if (tensPart > 2) {
                 result += tens.get(tensPart) + " ";
             }
-        }
-        if(unitsPart != 0) {
-            if(unitsPart == 1) result += "одна" + " ";
-            else if (unitsPart == 2) result += "две" + " " ;
-            else result += digits.get(unitsPart) + " ";
+            if (unitsPart != 0) {
+                switch (count) {
+                    case 4, 5, 6:
+                        if (unitsPart == 1) result += "одна" + " ";
+                        else if (unitsPart == 2) result += "две" + " ";
+                        else result += digits.get(unitsPart) + " ";
+                        break;
 
-            result += declinator.getDeclination(unitsPart, count);
+                    case 7, 8, 9, 10, 11, 12:
+                        result += digits.get(unitsPart) + " ";
+                        break;
+                    default:
+                        return "";
+                }
+            }
         }
+        if(number != 0) result += declinator.getDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
         return result;
     }
 }

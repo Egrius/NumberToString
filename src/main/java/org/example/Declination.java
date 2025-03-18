@@ -12,7 +12,7 @@ public class Declination {
             return getBigNumberDeclination(number, "тысяча", "тысячи", "тысяч");
         } else if (count >= 7 && count <= 9) {
             return getBigNumberDeclination(number, "миллион", "миллиона", "миллионов");
-        } else if (count >= 10 && count <= 13) {
+        } else if (count >= 10 && count <= 12) {
             return getBigNumberDeclination(number, "миллиард", "миллиарда", "миллиардов");
         }
         else return "";
