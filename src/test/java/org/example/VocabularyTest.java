@@ -17,6 +17,10 @@ class VocabularyTest {
     @Test
     public void shouldTranslateThousandDigitCorrectly() {
         Vocabulary vocabulary = new Vocabulary();
+        Assertions.assertEquals("сто пятьдесят три", vocabulary.translateThousands(153, 3));
+        Assertions.assertEquals("сорок шесть", vocabulary.translateThousands(46, 2));
+        Assertions.assertEquals("одиннадцать", vocabulary.translateThousands(11, 2));
+        Assertions.assertEquals("семь", vocabulary.translateThousands(7, 1));
         Assertions.assertEquals("сто девяносто одна тысяча", vocabulary.translateThousands(191, 6));
         Assertions.assertEquals("восемьдесят три тысячи", vocabulary.translateThousands(83, 5));
         Assertions.assertEquals("триста тридцать три тысячи", vocabulary.translateThousands(333, 6));

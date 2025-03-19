@@ -56,25 +56,6 @@ public class Vocabulary {
 
     public Vocabulary() { }
 
-    //Зависит от count
-    //Однозначные
-    protected String translateOne(int number) {
-        return digits.get(number);
-    }
-    //Десятки
-    protected String translateTwo(int number) {
-        if(number >= 20 && number <= 99) return tens.get(number / 10) + " " + digits.get(number % 10);
-        else return numbers.get(number);
-    }
-    //Сотни
-    //Эту функцию думаю можно перенести в translateThousands, да и ту функцию переименовать иначе.
-    protected String translateThree(int number, int count) {
-        if(number != 0) {
-            return hundreds.get(number);
-        } else return "";
-    }
-
-
     protected String translateThousands(int number, int count) {
         int hundredsPart = number / 100;
         int tensAndUnits = number % 100;
@@ -88,7 +69,7 @@ public class Vocabulary {
         }
 
         if (tensAndUnits >= 10 && tensAndUnits <= 19){
-            return numbers.get(tensAndUnits) + " " +  declinator.getDeclination(tensAndUnits, count);
+            return (numbers.get(tensAndUnits) + " " +  declinator.getDeclination(tensAndUnits, count)).trim();
 
         } else {
             if (tensPart > 2) {
@@ -96,6 +77,10 @@ public class Vocabulary {
             }
             if (unitsPart != 0) {
                 switch (count) {
+                    case 1,2,3:
+                        result += digits.get(unitsPart);
+                        return result.trim();
+
                     case 4, 5, 6:
                         if (unitsPart == 1) result += "одна" + " ";
                         else if (unitsPart == 2) result += "две" + " ";
@@ -111,6 +96,6 @@ public class Vocabulary {
             }
         }
         if(number != 0) result += declinator.getDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
-        return result;
+        return result.trim();
     }
 }
