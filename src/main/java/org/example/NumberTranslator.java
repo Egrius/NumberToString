@@ -1,8 +1,6 @@
 package org.example;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NumberTranslator {
     private String number;
@@ -17,9 +15,14 @@ public class NumberTranslator {
     public String printNumber() {
         StringBuilder result = new StringBuilder();
 
+        if (number.equals("-0") || number.equals("0")) {
+            return "ноль";
+        }
+        if((number.startsWith("-0") || number.startsWith("0")) && number.length() > 2) return "Число не должно начинаться с нуля!";
+
         if(number.charAt(0) == '-') {result.append("минус").append(" "); number = number.substring(1);}
 
-        ArrayList<Integer> digits = new ArrayList<Integer>();
+        ArrayList<Integer> digits = new ArrayList<>();
 
         for(int j = 0; j < number.length(); j++) {
             digits.add(Character.getNumericValue(number.charAt(j)));
@@ -29,11 +32,11 @@ public class NumberTranslator {
         int num;
         int i = 0;
         int mnozhitel;
-
+        int countToPass;
         while(i != count) {
             num = 0;
-
-            switch (count - i) {
+            countToPass = count - i;
+            switch (countToPass) {
                 case 12, 9, 6, 3:
                     mnozhitel = 100;
                     for(int j = 0; j < 3; j++){
@@ -54,28 +57,14 @@ public class NumberTranslator {
 
                 case 10, 7, 4, 1:
                     num += digits.get(i);
+
                     i++;
                     break;
                 default:
                     return "Ошибка, число такой длинны не поддерживается!";
             }
-            //System.out.println(num);
+            result.append(vocabulary.translateThousands(num, countToPass) + " ");
         }
         return result.toString().trim();
     }
-/*
-    private ArrayList<Integer> numberToArrayList(int num) {
-        ArrayList<Integer> digits = new ArrayList<>();
-        int del1 = 10, del2 = 1;
-        int buf;
-        while(num / del2 > 0) {
-            buf = (number % del1) / del2;
-            del1 *= 10;
-            del2 *= 10;
-            digits.add(0, buf);
-        }
-        return digits;
-    }
-
- */
 }
