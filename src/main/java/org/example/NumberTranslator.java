@@ -31,27 +31,27 @@ public class NumberTranslator {
         int count = digits.size();
         int num;
         int i = 0;
-        int mnozhitel;
+        int multiplier;
         int countToPass;
         while(i != count) {
             num = 0;
             countToPass = count - i;
             switch (countToPass) {
                 case 12, 9, 6, 3:
-                    mnozhitel = 100;
+                    multiplier = 100;
                     for(int j = 0; j < 3; j++){
-                        num += digits.get(i) * mnozhitel;
+                        num += digits.get(i) * multiplier;
                         i++;
-                        mnozhitel /= 10;
+                        multiplier /= 10;
                     }
                     break;
 
                 case 11, 8, 5, 2:
-                    mnozhitel = 10;
+                    multiplier = 10;
                     for(int j = 0; j < 2; j++){
-                        num += digits.get(i) * mnozhitel;
+                        num += digits.get(i) * multiplier;
                         i++;
-                        mnozhitel /= 10;
+                        multiplier /= 10;
                     }
                     break;
 
@@ -63,7 +63,8 @@ public class NumberTranslator {
                 default:
                     return "Ошибка, число такой длинны не поддерживается!";
             }
-            result.append(vocabulary.translateThousands(num, countToPass) + " ");
+            System.out.println(num + ", countToPass: " + countToPass);
+            result.append(vocabulary.translateThousands(num, countToPass)).append(" ");
         }
         return result.toString().trim();
     }

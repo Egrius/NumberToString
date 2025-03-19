@@ -52,7 +52,7 @@ public class Vocabulary {
             Map.entry(8, "восемьсот"),
             Map.entry(9, "девятьсот")
     );
-    private final Declination declinator = new Declination();
+    private final Declination declination = new Declination();
 
     public Vocabulary() { }
 
@@ -69,7 +69,8 @@ public class Vocabulary {
         }
 
         if (tensAndUnits >= 10 && tensAndUnits <= 19){
-            return (numbers.get(tensAndUnits) + " " +  declinator.getDeclination(tensAndUnits, count)).trim();
+            result += numbers.get(tensAndUnits) + " " + declination.getDeclination(tensAndUnits, count);
+            return result.trim();
 
         } else {
             if (tensPart > 2) {
@@ -95,7 +96,7 @@ public class Vocabulary {
                 }
             }
         }
-        if(number != 0) result += declinator.getDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
+        if(number != 0) result += declination.getDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
         return result.trim();
     }
 }

@@ -3,6 +3,8 @@ package org.example;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//Пока можно не обращать внимания, нужно для тестов
+
 public class FillData {
     public static void main(String[] args) {
         final String path = "src\\test\\java\\org\\example\\data\\";
@@ -10,7 +12,7 @@ public class FillData {
 
         try {
             FileWriter myWriter = new FileWriter(path+filename);
-            int i = 1;
+            int i;
 
             for(i = 1; i < Integer.MAX_VALUE; i++) {
                 myWriter.write(i + "\n");
