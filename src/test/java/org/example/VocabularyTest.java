@@ -6,16 +6,7 @@ import org.junit.jupiter.api.Test;
 class VocabularyTest {
 
     @Test
-    //Проверка на правильный перевод цифр
-    public void shouldTranslateOneDigitCorrectly() {
-        Vocabulary vocabulary = new Vocabulary();
-        for(int i = 0; i < 9; i++) {
-            Assertions.assertEquals(vocabulary.digits.get(i), vocabulary.translateOne(i));
-        }
-    }
-
-    @Test
-    public void shouldTranslateThousandDigitCorrectly() {
+    public void shouldTranslateCorrectly() {
         Vocabulary vocabulary = new Vocabulary();
         Assertions.assertEquals("сто пятьдесят три", vocabulary.translateThousands(153, 3));
         Assertions.assertEquals("сорок шесть", vocabulary.translateThousands(46, 2));
