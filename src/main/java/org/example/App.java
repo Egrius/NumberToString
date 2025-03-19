@@ -13,8 +13,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        NumberTranslator numberTranslator = new NumberTranslator(1222333444);
+        NumberTranslator numberTranslator = new NumberTranslator("-111222333444");
         String result = numberTranslator.printNumber();
         System.out.println(result);
+
     }
 }

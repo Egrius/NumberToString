@@ -1,13 +1,15 @@
 package org.example;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NumberTranslator {
-    private int number;
+    private String number;
 
     private final Vocabulary vocabulary;
 
-    public NumberTranslator(int num) {
+    public NumberTranslator(String num) {
         number = num;
         vocabulary = new Vocabulary();
     }
@@ -15,11 +17,15 @@ public class NumberTranslator {
     public String printNumber() {
         StringBuilder result = new StringBuilder();
 
-        if(number < 0) {result.append("минус").append(" "); number *= -1;}
+        if(number.charAt(0) == '-') {result.append("минус").append(" "); number = number.substring(1);}
 
-        ArrayList<Integer> digits = numberToArrayList(number);
+        ArrayList<Integer> digits = new ArrayList<Integer>();
+
+        for(int j = 0; j < number.length(); j++) {
+            digits.add(Character.getNumericValue(number.charAt(j)));
+        }
+
         int count = digits.size();
-
         int num;
         int i = 0;
         int mnozhitel;
@@ -35,7 +41,6 @@ public class NumberTranslator {
                         i++;
                         mnozhitel /= 10;
                     }
-
                     break;
 
                 case 11, 8, 5, 2:
@@ -51,13 +56,14 @@ public class NumberTranslator {
                     num += digits.get(i);
                     i++;
                     break;
+                default:
+                    return "Ошибка, число такой длинны не поддерживается!";
             }
-
-            System.out.println(num);
+            //System.out.println(num);
         }
         return result.toString().trim();
     }
-
+/*
     private ArrayList<Integer> numberToArrayList(int num) {
         ArrayList<Integer> digits = new ArrayList<>();
         int del1 = 10, del2 = 1;
@@ -70,4 +76,6 @@ public class NumberTranslator {
         }
         return digits;
     }
+
+ */
 }
