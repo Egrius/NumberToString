@@ -29,6 +29,19 @@ class VocabularyTest {
         }
         out.close();
     }
+    @Test
+    public void shouldTranslateNegativesFromThousand() throws IOException {
+        NumberTranslator numberTranslator = new NumberTranslator();
+        String fullOutputFileName = "src\\test\\java\\org\\example\\data\\negativeNumbersFromThousand.rba";
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fullOutputFileName)));
+
+        for(int i = -1000; i < 0; i++) {
+            out.println(numberTranslator.printNumber(String.valueOf(i)));
+        }
+        out.close();
+    }
+
+
     /*
     @Test
     public void shouldTranslateBeforeBillion() throws IOException {
