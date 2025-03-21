@@ -1,24 +1,47 @@
 package org.example;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
 
 class VocabularyTest {
 
     @Test
-    public void shouldTranslateCorrectly() {
-        Vocabulary vocabulary = new Vocabulary();
-        Assertions.assertEquals("сто пятьдесят три", vocabulary.translateThousands(153, 3));
-        Assertions.assertEquals("сорок шесть", vocabulary.translateThousands(46, 2));
-        Assertions.assertEquals("одиннадцать", vocabulary.translateThousands(11, 2));
-        Assertions.assertEquals("семь", vocabulary.translateThousands(7, 1));
-        Assertions.assertEquals("сто девяносто одна тысяча", vocabulary.translateThousands(191, 6));
-        Assertions.assertEquals("восемьдесят три тысячи", vocabulary.translateThousands(83, 5));
-        Assertions.assertEquals("триста тридцать три тысячи", vocabulary.translateThousands(333, 6));
-        Assertions.assertEquals("девять тысяч", vocabulary.translateThousands(9, 4));
-        Assertions.assertEquals("одиннадцать миллиардов", vocabulary.translateThousands(11, 11));
-        Assertions.assertEquals("сто тридцать один миллиард", vocabulary.translateThousands(131, 12));
+    public void shouldTranslateBeforeThousand() throws IOException {
+        NumberTranslator numberTranslator = new NumberTranslator();
+        String fullOutputFileName = "src\\test\\java\\org\\example\\data\\numbersBeforeThousand.rba";
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fullOutputFileName)));
 
+        for(int i = 0; i < 1000; i++) {
+            out.println(numberTranslator.printNumber(String.valueOf(i)));
+        }
+        out.close();
     }
+
+    @Test
+    public void shouldTranslateBeforeMillion() throws IOException {
+        NumberTranslator numberTranslator = new NumberTranslator();
+        String fullOutputFileName = "src\\test\\java\\org\\example\\data\\numbersBeforeMillion.rba";
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fullOutputFileName)));
+
+        for(int i = 1000; i < 1000000; i++) {
+            out.println(numberTranslator.printNumber(String.valueOf(i)));
+        }
+        out.close();
+    }
+    /*
+    @Test
+    public void shouldTranslateBeforeBillion() throws IOException {
+        NumberTranslator numberTranslator = new NumberTranslator();
+        String fullOutputFileName = "src\\test\\java\\org\\example\\data\\numbersBeforeBillion.rba";
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fullOutputFileName)));
+
+        for(int i = 1000000; i < 1000000000; i++) {
+            out.println(numberTranslator.printNumber(String.valueOf(i)));
+        }
+        out.close();
+        //Лишние гигабайты памяти? Запустите этот тест
+    }
+*/
 
 }

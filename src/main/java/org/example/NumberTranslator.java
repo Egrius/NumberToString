@@ -3,16 +3,14 @@ package org.example;
 import java.util.ArrayList;
 
 public class NumberTranslator {
-    private String number;
 
     private final Vocabulary vocabulary;
 
-    public NumberTranslator(String num) {
-        number = num;
+    public NumberTranslator() {
         vocabulary = new Vocabulary();
     }
 
-    public String printNumber() {
+    public String printNumber(String number) {
         StringBuilder result = new StringBuilder();
 
         if (number.equals("-0") || number.equals("0")) {
@@ -50,6 +48,7 @@ public class NumberTranslator {
                     multiplier = 10;
                     for(int j = 0; j < 2; j++){
                         num += digits.get(i) * multiplier;
+
                         i++;
                         multiplier /= 10;
                     }
@@ -63,7 +62,6 @@ public class NumberTranslator {
                 default:
                     return "Ошибка, число такой длинны не поддерживается!";
             }
-            System.out.println(num + ", countToPass: " + countToPass);
             result.append(vocabulary.translateThousands(num, countToPass)).append(" ");
         }
         return result.toString().trim();

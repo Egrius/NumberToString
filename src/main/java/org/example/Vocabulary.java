@@ -73,7 +73,7 @@ public class Vocabulary {
             return result.trim();
 
         } else {
-            if (tensPart > 2) {
+            if (tensPart >= 2) {
                 result += tens.get(tensPart) + " ";
             }
             if (unitsPart != 0) {

@@ -1,10 +1,5 @@
 package org.example;
 
-/*
-Планы:
-    - разобраться как работать с файлами
- */
-
 import java.util.Scanner;
 
 public class App
@@ -16,10 +11,9 @@ public class App
         System.out.println("Введите число, которое нужно перевести: ");
         String input = scanner.nextLine();
 
-        NumberTranslator numberTranslator = new NumberTranslator(input);
+        NumberTranslator numberTranslator = new NumberTranslator();
 
-        String result = numberTranslator.printNumber();
+        String result = numberTranslator.printNumber(input);
         System.out.println("\nРезультат перевода:\n\n" + result);
-
     }
 }
