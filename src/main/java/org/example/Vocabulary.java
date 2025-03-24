@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Vocabulary {
 
-    protected final Map<Integer, String> digits = Map.ofEntries(
+    private final Map<Integer, String> digits = Map.ofEntries(
             Map.entry(1, "один"),
             Map.entry(2, "два"),
             Map.entry(3, "три"),
@@ -16,7 +16,7 @@ public class Vocabulary {
             Map.entry(9, "девять")
     );
 
-    protected final Map<Integer, String> numbers = Map.ofEntries(
+    private final Map<Integer, String> numbers = Map.ofEntries(
             Map.entry(10, "десять"),
             Map.entry(11, "одиннадцать"),
             Map.entry(12, "двенадцать"),
@@ -29,7 +29,7 @@ public class Vocabulary {
             Map.entry(19, "девятнадцать")
     );
 
-    protected final Map<Integer, String> tens = Map.ofEntries(
+    private final Map<Integer, String> tens = Map.ofEntries(
             Map.entry(1, "десять"),
             Map.entry(2, "двадцать"),
             Map.entry(3, "тридцать"),
@@ -41,7 +41,7 @@ public class Vocabulary {
             Map.entry(9, "девяносто")
     );
 
-    protected final Map<Integer, String> hundreds = Map.ofEntries(
+    private final Map<Integer, String> hundreds = Map.ofEntries(
             Map.entry(1, "сто"),
             Map.entry(2, "двести"),
             Map.entry(3, "триста"),
@@ -56,7 +56,7 @@ public class Vocabulary {
 
     public Vocabulary() { }
 
-    protected String translateThousands(int number, int count) {
+    protected String translateNumber(int number, int count) {
         int hundredsPart = number / 100;
         int tensAndUnits = number % 100;
         int tensPart = tensAndUnits / 10;
@@ -88,11 +88,9 @@ public class Vocabulary {
                         else result += digits.get(unitsPart) + " ";
                         break;
 
-                    case 7, 8, 9, 10, 11, 12:
+                   default:
                         result += digits.get(unitsPart) + " ";
                         break;
-                    default:
-                        return "";
                 }
             }
         }
