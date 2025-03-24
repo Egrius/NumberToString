@@ -56,7 +56,7 @@ public class Vocabulary {
 
     public Vocabulary() { }
 
-    protected String translateNumber(int number, int count) {
+    protected String translateIntNumber(int number, int count) {
         int hundredsPart = number / 100;
         int tensAndUnits = number % 100;
         int tensPart = tensAndUnits / 10;
@@ -69,7 +69,7 @@ public class Vocabulary {
         }
 
         if (tensAndUnits >= 10 && tensAndUnits <= 19){
-            result += numbers.get(tensAndUnits) + " " + declination.getDeclination(tensAndUnits, count);
+            result += numbers.get(tensAndUnits) + " " + declination.getIntDeclination(tensAndUnits, count);
             return result.trim();
 
         } else {
@@ -94,7 +94,50 @@ public class Vocabulary {
                 }
             }
         }
-        if(number != 0) result += declination.getDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
+        if(number != 0) result += declination.getIntDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
+        return result.trim();
+    }
+
+    //Сделать перевод десятичной части!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    protected String translateDecimalNumber(int number, int count) {
+        int hundredsPart = number / 100;
+        int tensAndUnits = number % 100;
+        int tensPart = tensAndUnits / 10;
+        int unitsPart  = tensAndUnits % 10;
+
+        String result = "";
+
+        if(hundredsPart != 0) {
+            result += hundreds.get(hundredsPart) + " ";
+        }
+
+        if (tensAndUnits >= 10 && tensAndUnits <= 19){
+            result += numbers.get(tensAndUnits) + " " + declination.getIntDeclination(tensAndUnits, count);
+            return result.trim();
+
+        } else {
+            if (tensPart >= 2) {
+                result += tens.get(tensPart) + " ";
+            }
+            if (unitsPart != 0) {
+                switch (count) {
+                    case 1,2,3:
+                        result += digits.get(unitsPart);
+                        return result.trim();
+
+                    case 4, 5, 6:
+                        if (unitsPart == 1) result += "одна" + " ";
+                        else if (unitsPart == 2) result += "две" + " ";
+                        else result += digits.get(unitsPart) + " ";
+                        break;
+
+                    default:
+                        result += digits.get(unitsPart) + " ";
+                        break;
+                }
+            }
+        }
+        if(number != 0) result += declination.getIntDeclination(unitsPart != 0 ? unitsPart : tensAndUnits, count);
         return result.trim();
     }
 }
