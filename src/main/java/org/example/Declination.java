@@ -37,6 +37,7 @@ public class Declination {
     }
     //Выбор склонения для дробной части числа
     public String getDecimalDeclination (int number, int count) {
+
         return getBigDecimalNumberDeclination(number, singularDecimalDeclensions[count-1], pluralDecimalDeclensions[count-1]);
     }
 

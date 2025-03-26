@@ -1,11 +1,8 @@
 package org.example;
 
 import java.util.Scanner;
-
 /*
 Планы:
-    - Оптимизировать удаление нулей
-    - Обработка пустой части decimal
     - покрыть тестами
     - сделать входные и выходные файлы для тестов
 */
@@ -25,6 +22,8 @@ public class App
             System.out.println("\nРезультат перевода:\n\n" + result);
         } catch (startsFromZeroException e) {
             System.out.println("Ошибка! Целое число не может начинаться с нуля!");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Ошибка! Число не введено!");
         }
     }
 }

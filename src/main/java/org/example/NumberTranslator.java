@@ -7,8 +7,6 @@ public class NumberTranslator {
 
     private final Vocabulary vocabulary;
 
-    protected final StringBuilder result = new StringBuilder();
-
     public NumberTranslator() {
         vocabulary = new Vocabulary();
     }
@@ -22,7 +20,7 @@ public class NumberTranslator {
         }
     }
 
-    private String checkForNegative(String number) {
+    private String checkForNegative(String number, StringBuilder result) {
         if (number.charAt(0) == '-') {
             result.append("минус").append(" ");
             number = number.substring(1);
@@ -77,29 +75,27 @@ public class NumberTranslator {
 
     //Десятичная часть
 
-    private void deleteEndZeros(List<Integer> digitsDecimal) {
-        for(int i = digitsDecimal.size() - 1; i >= 0; i--) {
-            if(digitsDecimal.get(i) == 0) {
-                digitsDecimal.remove(i);
-            }
-            else return;
+    private List<Integer> deleteEndZeros(List<Integer> digitsDecimal) {
+        int lastNonZeroIndex = digitsDecimal.size() - 1;
+        while (lastNonZeroIndex >= 0 && digitsDecimal.get(lastNonZeroIndex) == 0) {
+            lastNonZeroIndex--;
         }
+        return digitsDecimal.stream()
+                .limit(lastNonZeroIndex + 1)
+                .toList();
     }
 
-    private void deleteLeadingZeros(List<Integer> digitsDecimal) {
-        for (int i = 0; i < digitsDecimal.size();) {
-            if (digitsDecimal.get(i) == 0) {
-                digitsDecimal.remove(i);
-            } else {
-                break;
-            }
-        }
+    private List<Integer> deleteLeadingZeros(List<Integer> digitsDecimal) {
+        return digitsDecimal
+                .stream()
+                .dropWhile(e -> e == 0)
+                .toList();
     }
 
     private void buildDecimalNumber(StringBuilder result, List<Integer> digitsDecimal, int lastIntDigit) {
-        deleteEndZeros(digitsDecimal);
+        digitsDecimal = deleteEndZeros(digitsDecimal);
         int countToPass = digitsDecimal.size();
-        deleteLeadingZeros(digitsDecimal);
+        digitsDecimal = deleteLeadingZeros(digitsDecimal);
 
         if (countToPass > 0) {
             if(lastIntDigit == 1) result.append("целая").append(" ");
@@ -113,36 +109,37 @@ public class NumberTranslator {
         }
     }
 
-    public String printNumber(String number) throws startsFromZeroException{
-
-        number = checkForNegative(number);
-
-        String[] parts = number.split("\\.");
-
-        String integerPart = parts[0]; // Целая часть
-        String decimalPart = parts.length > 1 ? parts[1] : ""; // Дробная часть, если имеется
-
+    public String printNumber(String number) throws startsFromZeroException, StringIndexOutOfBoundsException{
+        StringBuilder result = new StringBuilder();
         try {
+            number = checkForNegative(number, result);
+
+            String[] parts = number.split("\\.");
+            String integerPart = parts[0];
+            String decimalPart = parts.length > 1 ? parts[1] : "";
+
             specialCase(result, integerPart);
+
+            List<Integer> digitsInt;
+
+            if (!decimalPart.isEmpty()) {
+
+                digitsInt = numberToDigits(integerPart);
+                buildNumber(result, digitsInt, NumberPartType.DECIMAL);
+
+                List<Integer> digitsDecimal = numberToDigits(decimalPart);
+                buildDecimalNumber(result, digitsDecimal, digitsInt.getLast());
+            }
+            else {
+                digitsInt = numberToDigits(integerPart);
+                buildNumber(result, digitsInt, NumberPartType.INTEGER);
+            }
+            return result.toString().trim();
+
         } catch (startsFromZeroException e) {
             throw new startsFromZeroException();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new StringIndexOutOfBoundsException();
         }
-
-        List<Integer> digitsInt;
-
-        if (!decimalPart.isEmpty()) {
-
-            digitsInt = numberToDigits(integerPart);
-            buildNumber(result, digitsInt, NumberPartType.DECIMAL);
-
-            List<Integer> digitsDecimal = numberToDigits(decimalPart);
-            buildDecimalNumber(result, digitsDecimal, digitsInt.getLast());
-        }
-        else {
-            digitsInt = numberToDigits(integerPart);
-            buildNumber(result, digitsInt, NumberPartType.INTEGER);
-        }
-
-        return result.toString().trim();
     }
 }
