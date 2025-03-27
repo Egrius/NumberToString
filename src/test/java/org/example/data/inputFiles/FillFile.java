@@ -20,8 +20,6 @@ public class FillFile {
             df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
             df.setMaximumFractionDigits(6);
 
-
-
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fullOutputFileName)));
             for(int i = 0; i < 100; i++) {
                 double number = random.nextDouble(1000000000.999999999);

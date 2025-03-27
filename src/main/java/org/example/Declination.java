@@ -4,11 +4,13 @@ public class Declination {
 
     private static final String[] singularDecimalDeclensions = {
             "десятая", "сотая", "тысячная",
-            "дясятитысячная", "статысячная", "миллионная"
+            "дясятитысячная", "статысячная", "миллионная",
+            "дясятимиллионная", "стамиллионная"
     };
     private static final String[] pluralDecimalDeclensions = {
             "десятых", "сотых", "тысячных",
-            "дясятитысячных", "статысячных", "миллионных"
+            "дясятитысячных", "статысячных", "миллионных",
+            "дясятимиллионных", "стамиллионных"
     };
 
     //Возврат определенного склонения в зависимости от числа number
@@ -41,7 +43,6 @@ public class Declination {
         return getBigDecimalNumberDeclination(number, singularDecimalDeclensions[count-1], pluralDecimalDeclensions[count-1]);
     }
 
-    public Declination() {
 
-    }
+    public Declination() { }
 }

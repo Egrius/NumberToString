@@ -3,7 +3,6 @@ package org.example;
 import java.util.Map;
 
 public class Vocabulary {
-
     private final Map<Integer, String> digits = Map.ofEntries(
             Map.entry(1, "один"),
             Map.entry(2, "два"),
@@ -15,7 +14,6 @@ public class Vocabulary {
             Map.entry(8, "восемь"),
             Map.entry(9, "девять")
     );
-
     private final Map<Integer, String> numbers = Map.ofEntries(
             Map.entry(10, "десять"),
             Map.entry(11, "одиннадцать"),
@@ -28,7 +26,6 @@ public class Vocabulary {
             Map.entry(18, "восемнадцать"),
             Map.entry(19, "девятнадцать")
     );
-
     private final Map<Integer, String> tens = Map.ofEntries(
             Map.entry(1, "десять"),
             Map.entry(2, "двадцать"),
@@ -40,7 +37,6 @@ public class Vocabulary {
             Map.entry(8, "восемьдесят"),
             Map.entry(9, "девяносто")
     );
-
     private final Map<Integer, String> hundreds = Map.ofEntries(
             Map.entry(1, "сто"),
             Map.entry(2, "двести"),
@@ -63,8 +59,6 @@ public class Vocabulary {
         int unitsPart  = tensAndUnits % 10;
 
         String result = "";
-
-        //System.out.println("hundredsPart: " + hundredsPart + "\ntensPart: " + tensPart + "\nunitsPart: " + unitsPart + "\nCount to pass: " + count + "\n");
 
         if(hundredsPart != 0) {
             result += hundreds.get(hundredsPart) + " ";

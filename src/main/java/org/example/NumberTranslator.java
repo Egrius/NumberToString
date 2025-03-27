@@ -74,7 +74,6 @@ public class NumberTranslator {
     }
 
     //Десятичная часть
-
     private List<Integer> deleteEndZeros(List<Integer> digitsDecimal) {
         int lastNonZeroIndex = digitsDecimal.size() - 1;
         while (lastNonZeroIndex >= 0 && digitsDecimal.get(lastNonZeroIndex) == 0) {
