@@ -1,11 +1,7 @@
 package org.example;
 
 import java.util.Scanner;
-/*
-Планы:
-    - покрыть тестами
-    - сделать входные и выходные файлы для тестов
-*/
+
 public class App
 {
     public static void main( String[] args )

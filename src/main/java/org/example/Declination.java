@@ -2,15 +2,9 @@ package org.example;
 
 public class Declination {
 
-    private static final String[] singularDecimalDeclensions = {
-            "десятая", "сотая", "тысячная",
-            "дясятитысячная", "статысячная", "миллионная",
-            "дясятимиллионная", "стамиллионная"
-    };
-    private static final String[] pluralDecimalDeclensions = {
-            "десятых", "сотых", "тысячных",
-            "дясятитысячных", "статысячных", "миллионных",
-            "дясятимиллионных", "стамиллионных"
+    private static final String[] decimalBases = {
+            "десят", "сот", "тысячн", "десятитысячн", "стотысячн", "миллионн",
+            "десятимиллионн", "стомиллионн", "триллион", "десятитриллионн", "стотриллионн"
     };
 
     //Возврат определенного склонения в зависимости от числа number
@@ -28,21 +22,23 @@ public class Declination {
             return getBigIntNumberDeclination(number, "миллион", "миллиона", "миллионов");
         } else if (count >= 10 && count <= 12) {
             return getBigIntNumberDeclination(number, "миллиард", "миллиарда", "миллиардов");
+        } else if (count >= 13 && count <= 15) {
+            return getBigIntNumberDeclination(number, "триллион", "триллиона", "триллионов");
         }
         else return "";
     }
 
     //Возврат определенного склонения в зависимости от числа number
-    private String getBigDecimalNumberDeclination(int number, String singular, String many) {
-        if (number == 1) return singular;
-        else return many;
+    private String getDecimalEnding(int number, String singularEnding, String pluralEnding) {
+        return (number == 1) ? singularEnding : pluralEnding;
     }
+
     //Выбор склонения для дробной части числа
     public String getDecimalDeclination (int number, int count) {
-
-        return getBigDecimalNumberDeclination(number, singularDecimalDeclensions[count-1], pluralDecimalDeclensions[count-1]);
+        String base = decimalBases[count - 1];
+        String ending = getDecimalEnding(number, "ая", "ых");
+        return base + ending;
     }
-
 
     public Declination() { }
 }
