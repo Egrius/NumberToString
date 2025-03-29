@@ -20,6 +20,8 @@ public class App
             System.out.println("Ошибка! Целое число не может начинаться с нуля!");
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Ошибка! Число не введено!");
+        } catch (InvalidCharException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -32,7 +32,7 @@ public class NumberTranslator {
     private List<Integer> numberToDigits(String number) {
         List<Integer> digits = new ArrayList<>();
         for (int i = 0; i < number.length(); i++) {
-            if(number.charAt(i) == '.') {
+            if(number.charAt(i) == '.' || number.charAt(i) == ',') {
                 return digits;
             }
             digits.add(Character.getNumericValue(number.charAt(i)));
@@ -108,12 +108,14 @@ public class NumberTranslator {
         }
     }
 
-    public String printNumber(String number) throws startsFromZeroException, StringIndexOutOfBoundsException{
+    public String printNumber(String number) throws startsFromZeroException, StringIndexOutOfBoundsException, InvalidCharException {
         StringBuilder result = new StringBuilder();
         try {
             number = checkForNegative(number, result);
-
-            String[] parts = number.split("\\.");
+            if (!number.matches("^[\\d.,]+$")) {
+                throw new InvalidCharException("Число введено некорректно!");
+            }
+            String[] parts = number.split("[.,]");
             String integerPart = parts[0];
             String decimalPart = parts.length > 1 ? parts[1] : "";
 

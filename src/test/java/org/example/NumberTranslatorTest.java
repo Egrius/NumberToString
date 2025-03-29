@@ -47,7 +47,7 @@ class NumberTranslatorTest {
             out.close();
             reader.close();
         } catch(Exception e){
-            System.out.println(e);
+            System.err.println(e);
         }
     }
 
@@ -72,7 +72,7 @@ class NumberTranslatorTest {
            out.close();
            reader.close();
        } catch(Exception e){
-           System.out.println(e);
+           System.err.println(e);
        }
    }
 }
