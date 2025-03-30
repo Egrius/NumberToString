@@ -102,7 +102,7 @@ public class Vocabulary {
         return result.trim();
     }
 
-    protected String getDecimalDeclination(int lastDigit, int countToPass) {
-        return declination.getDecimalDeclination(lastDigit, countToPass);
+    protected String getFractionalDeclination(int lastDigit, int countToPass) {
+        return declination.getFractionalDeclination(lastDigit, countToPass);
     }
 }

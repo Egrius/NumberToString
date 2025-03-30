@@ -30,14 +30,14 @@ public class Declination {
     }
 
     //Возврат определенного склонения в зависимости от числа number
-    private String getDecimalEnding(int number, String singularEnding, String pluralEnding) {
+    private String getFractionalEnding(int number, String singularEnding, String pluralEnding) {
         return (number == 1) ? singularEnding : pluralEnding;
     }
 
     //Выбор склонения для дробной части числа
-    public String getDecimalDeclination (int number, int count) {
+    public String getFractionalDeclination (int number, int count) {
         String base = decimalBases[count - 1];
-        String ending = getDecimalEnding(number, "ая", "ых");
+        String ending = getFractionalEnding(number, "ая", "ых");
         return base + ending;
     }
 
