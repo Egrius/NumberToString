@@ -91,7 +91,7 @@ public class NumberTranslator {
             if (!decimalPart.isEmpty()) {
 
                 digitsInt = intPartToDigits(integerPart);
-                buildNumber(result, digitsInt, NumberPartType.DECIMAL);
+                buildNumber(result, digitsInt, NumberPartType.FRACTIONAL);
 
                 List<Integer> digitsDecimal = intPartToDigits(decimalPart);
                 buildFractionalNumber(result, digitsDecimal, digitsInt.getLast());
@@ -228,11 +228,11 @@ public class NumberTranslator {
      * и добавляет склонения.
      * <p>
      * Метод использует вспомогательные методы для удаления ведущих и завершающих нулей:
-     * @see #deleteLeadingZeros
-     * @see #deleteEndZeros
+     * @see #deleteLeadingZeros(List)
+     * @see #deleteEndZeros(List)
      *
      * Также применяется метод для перевода чисел:
-     * @see Vocabulary#translateNumber
+     * @see Vocabulary#translateNumber(int, int, NumberPartType)
      *
      * @param result строка, в которой хранится конечный результат перевода числа.
      * @param digitsDecimal список цифр дробной части.
@@ -255,7 +255,7 @@ public class NumberTranslator {
             else  result.append("целых").append(" ");
 
             // Перевод числа, содержащегося в дробной части.
-            buildNumber(result, digitsDecimal, NumberPartType.DECIMAL);
+            buildNumber(result, digitsDecimal, NumberPartType.FRACTIONAL);
 
             // Последняя цифра дробной части числа, необходима для корректного склонения дробной части.
             int lastDigit = digitsDecimal.getLast();
@@ -281,9 +281,8 @@ public class NumberTranslator {
      * @param result строка, в которую добавляется результат перевода числа.
      * @param digits список цифр, представляющих часть числа (целую или дробную).
      * @param type тип числа (целая часть или дробная часть), определяется перечислением {@link NumberPartType}.
-     * @see NumberPartType
-     * @see #translateIntPart
-     * @see #translateFractionalPart
+     * @see #translateIntPart(int, int)
+     * @see #translateFractionalPart(int, int)
      */
     private void buildNumber(StringBuilder result, List<Integer> digits, NumberPartType type) {
         int count = digits.size();
@@ -332,6 +331,6 @@ public class NumberTranslator {
      * @see Vocabulary
      */
     private String translateFractionalPart(int number, int countToPass) {
-        return vocabulary.translateNumber(number, countToPass, NumberPartType.DECIMAL);
+        return vocabulary.translateNumber(number, countToPass, NumberPartType.FRACTIONAL);
     }
 }
