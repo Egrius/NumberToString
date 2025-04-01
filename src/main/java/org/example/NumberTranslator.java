@@ -32,7 +32,6 @@ public class NumberTranslator {
         vocabulary = new Vocabulary();
     }
 
-
     /**
      * Переводит заданное число из строкового представления в текстовое.
      * Этот метод может обрабатывать как целые, так и дробные числа, а также учитывать отрицательные значения.
@@ -58,7 +57,6 @@ public class NumberTranslator {
      * @see #buildNumber(StringBuilder, List, NumberPartType)
      * @see #buildFractionalNumber(StringBuilder, List, int)
      */
-
     public String printNumber(String number) throws StartsFromZeroException,
                                                     StringIndexOutOfBoundsException,
                                                     InvalidCharException
