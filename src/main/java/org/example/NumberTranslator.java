@@ -61,40 +61,54 @@ public class NumberTranslator {
                                                     StringIndexOutOfBoundsException,
                                                     InvalidCharException
     {
-
+        // В случае, если передаваемая строка пустая, выбрасывается ошибка.
         if (number == null || number.isEmpty()) {
             throw new StringIndexOutOfBoundsException("Входная строка пуста.");
         }
 
+        // Переменная, в которую будет записываться результат перевода.
         StringBuilder result = new StringBuilder();
 
         try {
+            // Проверка числа на отрицательность
             number = checkForNegative(number, result);
+
+            // Проверка ввёденных символов, в случае несоответствия выбрасывается ошибка.
             if (!number.matches("^[\\d.,]+$")) {
                 throw new InvalidCharException("Ошибка! Число содержит недопустимые символы!");
             }
+            // Массив, состоящий из целой и дробной части, которые отделены "." либо ",".
             String[] parts = number.split("[.,]");
+
+            // integerPart хранит целую часть числа, decimalPart хранит дробную часть числа.
             String integerPart = parts[0];
-            String decimalPart = parts.length > 1 ? parts[1] : "";
+            String fractionalPart = parts.length > 1 ? parts[1] : "";
 
+            // Если целая часть числа пустая, то выбрасывается ошибка.
             if (integerPart.isEmpty()) {
-
                 throw new StringIndexOutOfBoundsException("Ошибка! Целая часть не может быть пустой!");
             }
-
+            // Проверка на случаи, когда целая часть начинается с нуля и правильный вывод -0
             specialCase(result, integerPart);
 
+            // Список, в котором будут храниться все цифры целой части числа.
             List<Integer> digitsInt;
 
-            if (!decimalPart.isEmpty()) {
+            // Проверка дробной части на пустоту. Если пусто, то строится только целая часть числа.
+            if (!fractionalPart.isEmpty()) {
 
+                // Заполнение списка, выделенного под целую часть числа.
                 digitsInt = intPartToDigits(integerPart);
+                // 'Сборка' целой части числа.
                 buildNumber(result, digitsInt, NumberPartType.FRACTIONAL);
 
-                List<Integer> digitsDecimal = intPartToDigits(decimalPart);
-                buildFractionalNumber(result, digitsDecimal, digitsInt.getLast());
+                // Список, в котором будут храниться все цифры дробной части числа.
+                List<Integer> digitsFractional = intPartToDigits(fractionalPart);
+                // 'Сборка' дробной части числа.
+                buildFractionalNumber(result, digitsFractional, digitsInt.getLast());
             }
             else {
+                // Заполнение списка, выделенного под целую часть числа и 'сборка' целой части числа.
                 digitsInt = intPartToDigits(integerPart);
                 buildNumber(result, digitsInt, NumberPartType.INTEGER);
             }
